@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {FormStyled, LoginContainerStyled, SocialButtonsStyled} from '../../styles/loginContainer'
 import { useDispatch } from "react-redux";
 import {
@@ -13,6 +13,7 @@ import { useFormik } from 'formik'
 
 
 export const Login = () => {
+  const navigate= useNavigate()
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -25,15 +26,18 @@ export const Login = () => {
     }),
     onSubmit:({email, password}) => {
       dispatch(loginEmailPassword(email, password))
+      navigate('/home')
     }
     
   })
 
   const handleGoogle = () => {
     dispatch(loginGoogle());
+    navigate('/home')
   };
   const handleFacebook = () => {
     dispatch(loginFacebook());
+    navigate('/home')
   };
 
   return (

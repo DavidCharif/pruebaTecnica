@@ -1,4 +1,4 @@
-export const productTypes = {
+export const ingredientTypes = {
   add : 'add',
   search: 'search'
   

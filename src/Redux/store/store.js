@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { carritoReducer } from "../reducers/carritoReducer";
 import { loginReducer } from "../reducers/loginReducers";
-import { productsReducer } from "../reducers/productsReducer";
+import { ingredientsReducer } from "../reducers/ingredientsReducer";
 import { registerReducer } from "../reducers/registerReducer";
 import { viewProductsReducers } from "../reducers/viewProductsReducer";
 import thunk from 'redux-thunk';
@@ -11,9 +11,9 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 const reducers = combineReducers({
   login: loginReducer,
   register: registerReducer,
-  registerLocal: registerLocalReducer
- 
-})
+  registerLocal: registerLocalReducer,
+  ingredients: ingredientsReducer
+ })
 
 export const store = createStore(reducers,composeEnhancers( 
   applyMiddleware(thunk)))

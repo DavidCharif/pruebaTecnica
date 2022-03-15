@@ -4,7 +4,8 @@ import {facebook, google, db} from '../../firebase/firebaseConfig'
 import { loginTypes } from "../types/loginTypes";
 
 import { addDoc,collection,getDocs,query,where,doc,deleteDoc} from "@firebase/firestore";
-import { productTypes } from "../types/productTypes";
+import { ingredientTypes } from "../types/ingredientTypes";
+
 
 export const loginEmailPassword = (email,password) =>{
     
@@ -48,7 +49,7 @@ export const loginGoogle = () => {
         const auth = getAuth();
         signInWithPopup(auth,google)
         .then(({user}) => {
-            console.log('user', user)
+            // console.log('user', user)
             const {uid, displayName, photoURL, email} = user
             dispatch(loginSincrono(displayName,email,uid,photoURL))
             console.log(`Bienvenid@ ${user.displayName}`);
@@ -119,7 +120,7 @@ export const searchAsync = (producto) => {
 
 export const searchSync = (productos) => {
     return {
-        type: productTypes.search,
+        type: ingredientTypes.search,
         payload: productos
     }
 }
