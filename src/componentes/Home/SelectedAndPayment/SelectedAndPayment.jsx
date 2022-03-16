@@ -1,26 +1,38 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { FlexItems, FlexPrice, PriceContainer } from "../../../styles/HomeStyle";
 
 const SelectedAndPayment = () => {
+  const shoppingCart = useSelector(store=> store.shoppingCart)
+  const ingredients = useSelector(store => store.ingredients)
+  console.log('ingredients', ingredients)
+  const itemsLength = shoppingCart.length
+  let totalSum = 0
+  let totalPrice = shoppingCart.forEach(element => {
+    totalSum += element.price
+    console.log('totalSum', totalSum)
+    return totalSum
+  });
   return (
-    <div>
-      <div>
+    <PriceContainer>
+      <FlexItems>
         <p>Items:</p>
-        <p>0</p>
-      </div>
-      <div>
+        <p>{itemsLength}</p>
+      </FlexItems>
+      <FlexPrice>
         <p>Subtotal</p>
-        <p>2,95$</p>
-      </div>
-      <div>
+        <p>{parseFloat(totalSum).toFixed(2)}{ingredients["currency"]}</p>
+      </FlexPrice>
+      <FlexPrice>
         <p>Gastos de envío</p>
-        <p>7.00$</p>
-      </div>
-      <div>
+        <p>{parseFloat(ingredients["shipping-cost"]).toFixed(2)}{ingredients["currency"]}</p>
+      </FlexPrice>
+      <FlexPrice>
         <p>Total</p>
-        <p>9.95$</p>
-      </div>
-      <button>Comprar ingredientes: 9,95$</button>
-    </div>
+        <p>{ parseFloat(ingredients['shipping-cost'] + totalSum).toFixed(2)}{ingredients["currency"]}</p>
+      </FlexPrice>
+      <button>Comprar ingredientes: { parseFloat(ingredients['shipping-cost'] + totalSum).toFixed(2)}{ingredients["currency"]}</button>
+    </PriceContainer>
   );
 };
 

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const HeaderStyled = styled.div`
+min-width:350px ;
+max-width: 550px;
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -69,6 +71,7 @@ margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-right: 20px;
   h1{
     margin-right: 10px;
   }
@@ -90,4 +93,28 @@ export const TittleBrandSize = styled.div`
     font-size: 14px;
   }
   
+`
+
+export const FlexPrice = styled.div`
+
+display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  p{
+    margin: 0px;
+  }`
+
+
+export const FlexItems = styled.div`
+
+display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  p{
+    margin: 0px;
+  }
+`
+
+export const PriceContainer = styled.div`
+padding: 20px;
 `
