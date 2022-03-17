@@ -15,9 +15,16 @@ const SelectedAndPayment = () => {
   let totalSum = 0;
   shoppingCart.forEach((element) => {
     // const quantity = document.getElementsByClassName('numberInput')
-    totalSum += element.price;
+    console.log('element.product', element.product)
+    Object.values(quantity).map((item) => {
+      if(element.product === item.name){
+
+        return totalSum += element.price * item.items;
+      }
+
+      return totalSum;
+    })    
     // console.log('totalSum', totalSum)
-    return totalSum;
   });
 
   const handleModal = () => {

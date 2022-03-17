@@ -15,6 +15,7 @@ import {
   TittleBrandSize,
 } from "../../../styles/HomeStyle";
 import { useEffect } from "react";
+import { actionChangeQuantity } from "../../../Redux/actions/actionChangeQuantity";
 
 const ListaProductos = () => {
   const dispatch = useDispatch();
@@ -33,18 +34,20 @@ const ListaProductos = () => {
   //   6: '1',
   // });
 
-  const handleAdd = ({ target }, ingredient) => {
-    if (!target.checked) {
-      dispatch(shoppingRemoveAction(ingredient));
-    } else {
-      dispatch(shoppingAddAction(ingredient));
-    }
-  };
+  // const handleAdd = ({ target }, ingredient) => {
+  //   if (!target.checked) {
+  //     dispatch(shoppingRemoveAction(ingredient));
+  //   } else {
+  //     dispatch(shoppingAddAction(ingredient));
+  //   }
+  // };
 
   const handleExternal = (e, index) => {
     let ingredient = ingredients[index]
-    console.log("quantity", quantity);
-    e.stopPropagation();
+
+ if(e.target === 'input'){
+   return "Changing quantity"
+ }
     const checked = document.getElementById(index);
     //  console.log('checked.checked', checked.checked)
     if (!checked.checked) {
@@ -66,15 +69,15 @@ const ListaProductos = () => {
   const handleQuantity = ({ target },index) => {
     let {brand, items, price, product, quantity} = ingredients[index]
     items = parseInt(target.value)
-    if(items === 0){
+    if(parseInt(target.value) < 1){
       return 'error'
     }
-    
+    // se actualiza el elemento con una nueva canti
     const newIngredient = {
       brand, items, price, product, quantity
     }
     dispatch(actionUpdateItem(index, newIngredient))
- 
+      dispatch(actionChangeQuantity(product, items))
   };
   useEffect(() => {
        console.log('cambie', ingredients)
@@ -95,7 +98,7 @@ const ListaProductos = () => {
                   className="input"
                   id={index}
                   type="checkbox"
-                  onChange={(e) => handleAdd(e, ingredients[index])}
+                  // onChange={(e) => handleAdd(e, ingredients[index])}
                 />
                 {/* <BoxStyled>
                 <p>{ingredient.items}</p>
@@ -106,7 +109,8 @@ const ListaProductos = () => {
                   className="numberInput"
                   type="number"
                   placeholder="1"
-                  
+                  min={1}                  
+                  max={5}
                   onChange={(e) => handleQuantity(e,index)}
                 ></input>
                 <TittleBrandSize>
@@ -117,7 +121,7 @@ const ListaProductos = () => {
               </IngredientContainerLeft>
               <IngredientContainerRight>
                 <h2>
-                  {parseFloat(ingredients[index].price * ingredients[index].items).toFixed(2) }{" "}
+                  {parseFloat(ingredients[index].price * quantity[index].items).toFixed(2) }{" "}
                   {currency}
                 </h2>
               </IngredientContainerRight>

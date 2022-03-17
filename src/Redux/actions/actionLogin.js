@@ -9,13 +9,9 @@ import { loginTypes } from "../types/loginTypes";
 import {
   addDoc,
   collection,
-  getDocs,
-  query,
-  where,
-  doc,
-  deleteDoc,
+ 
 } from "@firebase/firestore";
-import { ingredientTypes } from "../types/ingredientTypes";
+
 import { registerUserSync } from "./actionRegister";
 
 export const loginEmailPassword = (email, password) => {
@@ -128,31 +124,3 @@ export const logoutSincrono = () => {
   };
 };
 
-// Search
-export const searchAsync = (producto) => {
-  return async (dispatch) => {
-    const traerCollection = collection(db, "ProdouctosAmazon");
-    const q = query(
-      traerCollection,
-      where("nombre", ">=", producto, "<", producto + "z")
-    );
-    const datos = await getDocs(q);
-
-    const productos = [];
-    datos.forEach((docu) => {
-      productos.push({
-        id: docu.id,
-        data: docu.data(),
-      });
-      console.log("docu.data()", docu.data());
-    });
-    dispatch(searchSync(productos));
-  };
-};
-
-export const searchSync = (productos) => {
-  return {
-    type: ingredientTypes.search,
-    payload: productos,
-  };
-};
