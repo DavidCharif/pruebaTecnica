@@ -1,5 +1,6 @@
 export const ingredientTypes = {
   add : 'add',
-  search: 'search'
+  search: 'search',
+  update: 'update'
   
 }

@@ -8,14 +8,17 @@ import { urlApi } from "../../helpers/urlApi";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ingredientsAddAction } from "../../Redux/actions/ingredientsAddActions";
+import { actionChangeQuantityAdd } from "../../Redux/actions/actionChangeQuantity";
 const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get(urlApi)
       .then((res) => {
-        console.log("res", res.data);
+        // console.log("res", res.data);
+        dispatch(actionChangeQuantityAdd(res.data))
         dispatch(ingredientsAddAction(res.data));
+        
       })
       .catch((e) => {
         console.log('e', e)

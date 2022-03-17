@@ -7,3 +7,13 @@ export const ingredientsAddAction = (productos) => {
     payload: productos
   }
 }
+
+export const actionUpdateItem = (index, ingredient) => {
+  return {
+    type: ingredientTypes.update,
+    payload: {
+      index, ingredient
+    }
+  }
+}
+

@@ -1,14 +1,19 @@
-import { ingredientTypes } from "../types/ingredientTypes"
+import { ingredientTypes } from "../types/ingredientTypes";
 
-const initialStateProducts = []
+const initialStateProducts = [];
 
 export const ingredientsReducer = (state = initialStateProducts, action) => {
-  switch(action.type){
+  switch (action.type) {
     case ingredientTypes.add:
-      return action.payload
+      return action.payload;
     case ingredientTypes.search:
-      return action.payload
+      return action.payload;
+    case ingredientTypes.update:
+      let index = action.payload.index;
+      let copyState = state;
+      copyState.ingredients[index] = action.payload.ingredient;
+      return copyState;
     default:
-      return state
+      return state;
   }
-}
+};
